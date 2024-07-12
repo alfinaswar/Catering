@@ -70,8 +70,8 @@
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
                     <a href=".">
-                        <img src="{{ asset('assets2/img/logo/logo.png') }}" width="110" height="32"
-                            alt="Tabler" class="navbar-brand-image">
+                        <img src="{{ asset('assets2/img/logo/logo.png') }}" width="110" height="32" alt="Tabler"
+                            class="navbar-brand-image">
                     </a>
                 </h1>
                 <div class="navbar-nav flex-row order-md-last">
@@ -247,8 +247,9 @@
                                 <div>{{ auth()->user()->name ?? 'guest' }}</div>
                             </div>
                         </a> --}}
-                    <a href="{{ route('logout') }}" class="nav-link d-flex lh-1 text-reset p-0" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <span class="avatar avatar-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                        <a href="{{ route('logout') }}" class="nav-link d-flex lh-1 text-reset p-0"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <span class="avatar avatar-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24"
                                     height="24" viewBox="0 0 24 24" fill="#2465ff"
                                     class="icon icon-tabler icons-tabler-filled icon-tabler-user">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -256,13 +257,13 @@
                                     <path
                                         d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" />
                                 </svg></span>
-                        <div class="d-none d-xl-block ps-2">
-                            <div>Logout</div>
-                        </div>
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
+                            <div class="d-none d-xl-block ps-2">
+                                <div>Logout</div>
+                            </div>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </div>
                 </div>
             </div>
@@ -292,83 +293,83 @@
                                 </a>
                             </li>
                             @can('tambah-produk')
-                            <li class="nav-item dropdown {{ request()->segment(2) == 'makanan' ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ route('makanan.index') }}">
-                                    <span
-                                    class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-building-skyscraper">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M3 21l18 0" />
-                                            <path d="M5 21v-14l8 -4v18" />
-                                            <path d="M19 21v-10l-6 -4" />
-                                            <path d="M9 9l0 .01" />
-                                            <path d="M9 12l0 .01" />
-                                            <path d="M9 15l0 .01" />
-                                            <path d="M9 18l0 .01" />
-                                        </svg>
-                                    </span>
-                                    <span class="nav-link-title">
-                                        Produk
-                                    </span>
-                                </a>
+                                <li class="nav-item dropdown {{ request()->segment(2) == 'makanan' ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('makanan.index') }}">
+                                        <span
+                                            class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="icon icon-tabler icons-tabler-outline icon-tabler-building-skyscraper">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M3 21l18 0" />
+                                                <path d="M5 21v-14l8 -4v18" />
+                                                <path d="M19 21v-10l-6 -4" />
+                                                <path d="M9 9l0 .01" />
+                                                <path d="M9 12l0 .01" />
+                                                <path d="M9 15l0 .01" />
+                                                <path d="M9 18l0 .01" />
+                                            </svg>
+                                        </span>
+                                        <span class="nav-link-title">
+                                            Produk
+                                        </span>
+                                    </a>
 
-                            </li>
+                                </li>
                             @endcan
-                                @can('transaksi')
-                            <li class="nav-item dropdown {{ request()->segment(2) == 'client' ? 'active' : '' }}">
-                                <a class="nav-link" href="#">
-                                    <span
-                                    class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-building-skyscraper">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M3 21l18 0" />
-                                            <path d="M5 21v-14l8 -4v18" />
-                                            <path d="M19 21v-10l-6 -4" />
-                                            <path d="M9 9l0 .01" />
-                                            <path d="M9 12l0 .01" />
-                                            <path d="M9 15l0 .01" />
-                                            <path d="M9 18l0 .01" />
-                                        </svg>
-                                    </span>
-                                    <span class="nav-link-title">
-                                        Transaksi
-                                    </span>
-                                </a>
+                            @can('transaksi')
+                                <li class="nav-item dropdown {{ request()->segment(2) == 'client' ? 'active' : '' }}">
+                                    <a class="nav-link" href="#">
+                                        <span
+                                            class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="icon icon-tabler icons-tabler-outline icon-tabler-building-skyscraper">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M3 21l18 0" />
+                                                <path d="M5 21v-14l8 -4v18" />
+                                                <path d="M19 21v-10l-6 -4" />
+                                                <path d="M9 9l0 .01" />
+                                                <path d="M9 12l0 .01" />
+                                                <path d="M9 15l0 .01" />
+                                                <path d="M9 18l0 .01" />
+                                            </svg>
+                                        </span>
+                                        <span class="nav-link-title">
+                                            Transaksi
+                                        </span>
+                                    </a>
 
-                            </li>
-@endcan
-@can('kategori')
- <li class="nav-item dropdown {{ request()->segment(2) == 'client' ? 'active' : '' }}">
-                                <a class="nav-link" href="#">
-                                    <span
-                                    class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-building-skyscraper">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M3 21l18 0" />
-                                            <path d="M5 21v-14l8 -4v18" />
-                                            <path d="M19 21v-10l-6 -4" />
-                                            <path d="M9 9l0 .01" />
-                                            <path d="M9 12l0 .01" />
-                                            <path d="M9 15l0 .01" />
-                                            <path d="M9 18l0 .01" />
-                                        </svg>
-                                    </span>
-                                    <span class="nav-link-title">
-                                        Kategori Makanan
-                                    </span>
-                                </a>
+                                </li>
+                            @endcan
+                            @can('kategori')
+                                <li class="nav-item dropdown {{ request()->segment(2) == 'client' ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('makanan.kategori') }}">
+                                        <span
+                                            class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="icon icon-tabler icons-tabler-outline icon-tabler-building-skyscraper">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M3 21l18 0" />
+                                                <path d="M5 21v-14l8 -4v18" />
+                                                <path d="M19 21v-10l-6 -4" />
+                                                <path d="M9 9l0 .01" />
+                                                <path d="M9 12l0 .01" />
+                                                <path d="M9 15l0 .01" />
+                                                <path d="M9 18l0 .01" />
+                                            </svg>
+                                        </span>
+                                        <span class="nav-link-title">
+                                            Kategori Makanan
+                                        </span>
+                                    </a>
 
-                            </li>
-@endcan
+                                </li>
+                            @endcan
 
                         </ul>
                         {{-- <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">

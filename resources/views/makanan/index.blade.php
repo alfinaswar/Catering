@@ -17,7 +17,7 @@
                     <!-- Page title actions -->
                     <div class="col-auto ms-auto d-print-none">
                         <div class="btn-list">
-                            <a href="{{route('makanan.create')}}" class="btn btn-primary d-none d-sm-inline-block">
+                            <a href="{{ route('makanan.create') }}" class="btn btn-primary d-none d-sm-inline-block">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                     stroke-linecap="round" stroke-linejoin="round">
@@ -63,26 +63,33 @@
                                     <th width="115" class="text-center">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody style="vertical-align: middle;">
                                 @if ($makanan->isEmpty())
+                                    <tr>
+                                        <td colspan="5" class="text-center">Data belum di isi</td>
+                                    </tr>
+                                @else
+                                    @foreach ($makanan as $key => $item)
                                         <tr>
-                                            <td colspan="5" class="text-center">Data belum di isi</td>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $item->kategori }}</td>
+                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->harga }}</td>
+                                            <td><img src="{{ url('storage/gambar/' . $item->gambar) }}" alt="Gambar Produk"
+                                                    width="200"></td>
+                                            <td width="20%">
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                    action="{{ route('makanan.destroy', $item->id) }}" method="POST">
+                                                    <a href="{{ route('makanan.edit', $item->id) }}"
+                                                        class="btn btn-primary">Edit</a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">HAPUS</button>
+                                                </form>
+                                            </td>
                                         </tr>
-                                    @else
-@foreach ($makanan as $key => $item)
-    <tr>
-        <td>{{$key+1}}</td>
-        <td>{{$item->kategori}}</td>
-        <td>{{$item->nama}}</td>
-        <td>{{$item->harga}}</td>
-        <td>{{$item->gambar}}</td>
-        <td>
-            <a href="{{ route('makanan.edit', ['id' => $item->id]) }}" class="btn btn-primary">Edit</a>
-            <a href="{{ route('makanan.destroy', ['id' => $item->id]) }}" class="btn btn-danger">Hapus</a>
-        </td>
-    </tr>
-@endforeach
-@endif
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
