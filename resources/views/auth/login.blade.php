@@ -35,7 +35,7 @@
       <div class="container container-tight py-4">
         <div class="text-center mb-4">
           <a href="." class="navbar-brand navbar-brand-autodark">
-            <img src="{{asset('assets2/img/logo/logoapp-big.png')}}" width="200" height="122" alt="Tabler" class="navbar-brand-image">
+            <img src="{{asset('assets/img/logo/clover logoq.png')}}" width="80px" height="80px" alt="Tabler">
           </a>
         </div>
         <div class="card card-md">

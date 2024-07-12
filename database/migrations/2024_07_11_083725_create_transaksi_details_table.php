@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('jumlah')->nullable();
             $table->decimal('harga');
             $table->softDeletes();
+        
             $table->timestamps();
         });
     }

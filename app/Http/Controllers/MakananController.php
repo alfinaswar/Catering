@@ -12,7 +12,8 @@ class MakananController extends Controller
      */
     public function index()
     {
-        //
+        $makanan =  Makanan::all();
+        return view('makanan.index',compact('makanan'));
     }
 
     /**
@@ -20,7 +21,7 @@ class MakananController extends Controller
      */
     public function create()
     {
-        //
+        return view('makanan.create');
     }
 
     /**
@@ -28,7 +29,17 @@ class MakananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    $data = $request->all();
+   if($request->hasFile('gambar')){
+    $gambar = $request->file('gambar');
+    $gambar->storeAs('public/gambar', $gambar->hashName());
+    $data['gambar'] = $gambar->hashName();
+   }else{
+    $data['gambar'] = null;
+   }
+    Makanan::create($data);
+
+    return redirect()->route('makanan.index')->with('status', 'Makanan berhasil ditambahkan!');
     }
 
     /**

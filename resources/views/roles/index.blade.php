@@ -2,55 +2,87 @@
 
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Role Management</h2>
+<div class="page-wrapper mb-3">
+        <div class="page-header d-print-none">
+            <div class="container-xl">
+                <div class="row g-2 align-items-center">
+                    <div class="col">
+                        <!-- Page pre-title -->
+                        <div class="page-pretitle">
+                            Master
+                        </div>
+                        <h2 class="page-title">
+                            Pengguna Sistem
+                        </h2>
+                    </div>
+                    <!-- Page title actions -->
+                    <div class="col-auto ms-auto d-print-none">
+
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="pull-right">
-        @can('role-create')
-            <a class="btn btn-success" href="{{ route('roles.create') }}"> Create New Role</a>
-            @endcan
-        </div>
-    </div>
-</div>
+        <!-- Page body -->
+        <div class="page-body">
 
+            <div class="container-xl">
 
-@if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        {{ $message }}
-    </div>
-@endif
+                <div class="card">
+                    <div class="card-header bg-azure">
+                        <h3 class="card-title">Daftar User </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            @if ($message = Session::get('success'))
+                    <script>
+                      Swal.fire({
+                        icon: 'success',
+                        title: 'success',
+                        text: '{{ $message }}',
+                      });
+                    </script>
+                    @endif
 
-
-<table class="table table-bordered">
+                    <table class="datatable-init-export nowrap table" data-export-title="Export">
+                        <thead>
   <tr>
      <th>No</th>
      <th>Name</th>
      <th width="280px">Action</th>
   </tr>
+</thead>
+<tbody>
     @foreach ($roles as $key => $role)
     <tr>
         <td>{{ ++$i }}</td>
         <td>{{ $role->name }}</td>
         <td>
-            <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Show</a>
-            @can('role-edit')
-                <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
-            @endcan
-            @can('role-delete')
+
+
+                <a class="btn btn-primary" style="background-color:#6b6ef5;" href="{{ route('roles.edit',$role->id) }}">Edit</a>
+
+
                 {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                 {!! Form::close() !!}
-            @endcan
+
         </td>
     </tr>
-    @endforeach
-</table>
+   @endforeach
+                                                      </tbody>
+                                                  </table>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-{!! $roles->render() !!}
+    </div>
 
-
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection
+
+
+
+{{-- <p class="text-center text-primary"><small>..</small></p>
+@endsection --}}
