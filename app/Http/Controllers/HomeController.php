@@ -29,11 +29,5 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function allmenu()
-    {
-        $kategori = KategoriMakanan::all();
-        $makanan = Makanan::with('kategorimakan')->get();
-        // dd($makanan);
-        return view('menu-catering.all-menu', compact('kategori', 'makanan'));
-    }
+
 }

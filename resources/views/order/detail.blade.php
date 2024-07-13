@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
 @include('layouts.head')
-
 <body>
     <!-- Page Preloder -->
     <div id="preloder">
@@ -33,7 +31,11 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
+                @if (Auth::check())
+                    <a href="{{ route('logout') }}"><i class="fa fa-user"></i> Logout</a>
+                @else
+                    <a href="#"><i class="fa fa-user"></i> Login</a>
+                @endif
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -79,6 +81,7 @@
                                 <li><a href="#">Beranda</a></li>
                                 <li><a href="#">Tentang Kami</a></li>
                                 <li><a href="{{ route('menu.allmenu') }}">Menu Catering</a></li>
+                                <li><a href="{{ route('order.history') }}">Riwayat Order</a></li>
                             </ul>
                         </div>
                     </div>
@@ -138,24 +141,11 @@
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
-    <section class="hero">
+    <section class="hero hero-normal">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>Kategori Menu</span>
-                        </div>
-                        <ul>
-                            @foreach ($kategori as $k)
-                                <li data-filter=".{{ str_replace(' ', '', $k->kategori) }}">
-                                    <a href="#">{{ $k->kategori }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
+
+                <div class="col-lg-12">
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form action="#">
@@ -177,118 +167,133 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section-title">
-                                    <h2>Daftar Menu</h2>
-                                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
 
-                            </div>
-                        </div>
-
-                        <div class="row featured__filter">
-                            @foreach ($makanan as $m)
-                                <div
-                                    class="col-lg-3 col-md-4 col-sm-6 mix {{ str_replace(' ', '', $m->kategorimakan->kategori) }}">
-                                    <div class="featured__item">
-                                        <div class="featured__item__pic set-bg"
-                                            data-setbg="{{ url('storage/gambar/' . $m->gambar) }}">
-
-                                        </div>
-                                        <a href="{{route('order.detail',$m->id)}}" class="btn btn-primary w-100 mb-2">Pesan Sekarang</a>
-                                        <div class="featured__item__text">
-
-                                            <h6><a href="#">{{ $m->nama }}</a></h6>
-                                            <h5>Rp {{ number_format($m->harga, 0, ',', '.') }}</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-
-
-                        </div>
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{{ asset('') }}assets/img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>{{ $detail->nama }}</h2>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- Breadcrumb Section End -->
 
-    <footer class="footer spad">
+    <!-- Product Details Section Begin -->
+    <section class="product-details spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__about__logo">
-                            <a href="./index.html"><img src="{{ asset('') }}assets/img/logo.png"
-                                    alt=""></a>
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img class="product__details__pic__item--large"
+                                src="{{ url('storage/gambar/' . $detail->gambar) }}"
+                                alt="">
                         </div>
-                        <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
-                        </ul>
+
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                    <div class="footer__widget">
-                        <h6>Useful Links</h6>
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
-                            <li><a href="#">Delivery infomation</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">Who We Are</a></li>
-                            <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__text">
+                        <h3>{{ $detail->nama }}</h3>
+                        <div class="product__details__rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer__copyright">
-                        <div class="footer__copyright__text">
-                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;
-                                <script>
-                                    document.write(new Date().getFullYear());
-                                </script> All rights reserved | This template is made with <i
-                                    class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                                    target="_blank">Colorlib</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </p>
+                        <form action="{{route('order.store')}}" enctype="multipart/form-data" method="POST">
+                            @csrf
+                            <input type="text" value="{{$detail->harga}}" name="harga">
+                            <input type="text" value="alamat" name="alamatkirim">
+                        <div class="product__details__price" id="harga" value="{{$detail->harga}}">Rp {{ number_format($detail->harga, 0, ',', '.') }}</div>
+                        <p>{{ $detail->deskripsi }}</p>
+                        <label style="font-weight: bold;"><i class="fas fa-map-marker"></i> Alamat Pengiriman</label>
+                       <div class="row">
+                                <div class="col-sm-6">
+                                    123123
+                                </div>
+
+                            </div>
+                        <div class="product__details__quantity">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="quantity">
+                                        <div class="pro-qty">
+                                            <input type="text" value="1" id="qty" id="qty" oninput="calculateTotal()">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="product__details__price" id="total">Rp. {{ number_format($detail->harga, 0, ',', '.') }}</div>
+                                </div>
+
+                            </div>
+
+
+
+
                         </div>
-                        <div class="footer__copyright__payment"><img
-                                src="{{ asset('') }}assets/img/payment-item.png" alt=""></div>
+
+                        <ul>
+                            <h3>Pesanan Tambahan</h3>
+                           <div class="row">
+    <div class="col-sm-9 mb-2">
+    <label class="fw-bold" style="font-weight: bold; font-size:17;">Minuman</label>
+      <select name="minuman" class="w-100">
+        @foreach ($minuman as $x)
+        <option value="{{$x->id}}">{{$x->nama}} - Rp. {{ number_format($x->harga, 0, ',', '.') }}</option>
+        @endforeach
+      </select>
+    </div>
+    <div class="col-sm-9">
+    <label class="fw-bold" style="font-weight: bold; font-size:17;">Kue</label>
+      <select name="kue" class="w-100">
+        @foreach ($kue as $x)
+        <option value="{{$x->id}}">{{$x->nama}} - Rp. {{ number_format($x->harga, 0, ',', '.') }}</option>
+        @endforeach
+      </select>
+    </div>
+        <div class="col-sm-9">
+    <label class="fw-bold" style="font-weight: bold; font-size:17;">Buah</label>
+      <select name="buah" class="w-100">
+        @foreach ($buah as $x)
+        <option value="{{$x->id}}">{{$x->nama}} - Rp. {{ number_format($x->harga, 0, ',', '.') }}</option>
+        @endforeach
+      </select>
+    </div>
+            <div class="col-sm-9">
+    <label class="fw-bold" style="font-weight: bold; font-size:17;">Bukti Bayar</label>
+      <input type="file" name="buktibayar" style="width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+    </div>
+     <div class="col-sm-9">
+        <br>
+        <button type="submit" class="btn btn-primary w-100">Pesan Sekarang</button><br/><br>
+        <a href="" class="btn btn-primary w-100">Masukan Ke Keranjang</a>
+    </div>
+
+  </div>
+                        </ul>
+
                     </div>
                 </div>
+
             </div>
         </div>
-    </footer>
+    </form>
+    </section>
+
+    @include('layouts.footer')
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
@@ -302,7 +307,12 @@
     <script src="{{ asset('') }}assets/js/main.js"></script>
 
 
-
 </body>
 
 </html>
+<script>
+$(document).ready(function () {
+    var harga = document.getElementById('harga').getAttribute('value');
+    console.log($harga);
+});
+</script>
