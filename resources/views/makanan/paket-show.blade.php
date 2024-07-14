@@ -72,7 +72,8 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><a href="{{ route('beranda') }}">Beranda</a></li>
+                                <li><a href="#">Beranda</a></li>
+                                <li><a href="#">Tentang Kami</a></li>
                                 <li><a href="{{ route('menu.allmenu') }}">Menu Catering</a></li>
                                 <li><a href="{{ route('order.history') }}">Riwayat Order</a></li>
                                 <li><a href="{{ route('order.history') }}">Keranjang ku</a></li>
@@ -135,9 +136,12 @@
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form action="#">
-                                <div class="hero__search__form__text">
-                                    <img src="{{ asset('assets/img/banner/clover.png') }}">
+                                <div class="hero__search__categories">
+                                    All Categories
+                                    <span class="arrow_carrot-down"></span>
                                 </div>
+                                <input type="text" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
                         <div class="hero__search__phone">
@@ -162,7 +166,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>{{ $detail->nama }}</h2>
+                        <h2>{{ $paket->nama }}</h2>
                     </div>
                 </div>
             </div>
@@ -177,15 +181,16 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
+
                             <img class="product__details__pic__item--large"
-                                src="{{ url('storage/gambar/' . $detail->gambar) }}" alt="">
+                                src="{{ asset('assets/img/banner/bgcover.png') }}" alt="">
                         </div>
 
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
-                        <h3>{{ $detail->nama }}</h3>
+                        <h3>{{ $paket->nama }}</h3>
                         <div class="product__details__rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -196,13 +201,13 @@
                         </div>
                         <form action="{{ route('order.store') }}" enctype="multipart/form-data" method="POST">
                             @csrf
-                            <input type="hidden" value="{{ $detail->harga }}" name="harga">
+                            <input type="hidden" value="{{ $paket->harga }}" name="harga">
                             <input type="hidden" value="{{ $user->customer->alamat }}" name="alamatkirim"
                                 id="alamatkirim">
-                            <input type="hidden" value="{{ $detail->id }}" name="idmakananhidden">
-                            <div class="product__details__price" id="harga" value="{{ $detail->harga }}">Rp
-                                {{ number_format($detail->harga, 0, ',', '.') }}</div>
-                            <p>{{ $detail->deskripsi }}</p>
+                            <input type="hidden" value="{{ $paket->id }}" name="idmakananhidden">
+                            <div class="product__details__price" id="harga" value="{{ $paket->harga }}">Rp
+                                {{ number_format($paket->harga, 0, ',', '.') }}</div>
+                            <p>{{ $paket->deskripsi }}</p>
                             <label style="font-weight: bold;"><i class="fas fa-map-marker"></i> Alamat
                                 Pengiriman</label>
                             <div class="row">
@@ -222,7 +227,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="product__details__price" id="total">Rp.
-                                            {{ number_format($detail->harga, 0, ',', '.') }}</div>
+                                            {{ number_format($paket->harga, 0, ',', '.') }}</div>
                                     </div>
 
                                 </div>
@@ -233,34 +238,38 @@
                             </div>
 
                             <ul>
-                                <h3>Pesanan Tambahan</h3>
+                                <h3>Paket</h3>
                                 <div class="row">
                                     <div class="col-sm-9 mb-2">
                                         <label class="fw-bold"
                                             style="font-weight: bold; font-size:17;">Minuman</label>
                                         <select name="minuman" class="w-100">
-                                            @foreach ($minuman as $x)
-                                                <option value="{{ $x->id }}">{{ $x->nama }} - Rp.
-                                                    {{ number_format($x->harga, 0, ',', '.') }}</option>
-                                            @endforeach
+
+                                            <option value="{{ $paket->idminuman }}">{{ $paket->nama }} - Rp.
+                                                {{ number_format($paket->harga, 0, ',', '.') }}</option>
+
                                         </select>
                                     </div>
                                     <div class="col-sm-9">
                                         <label class="fw-bold" style="font-weight: bold; font-size:17;">Kue</label>
                                         <select name="kue" class="w-100">
-                                            @foreach ($kue as $x)
-                                                <option value="{{ $x->id }}">{{ $x->nama }} - Rp.
-                                                    {{ number_format($x->harga, 0, ',', '.') }}</option>
-                                            @endforeach
+                                            <option value="{{ $paket->idkue }}">{{ $paket->nama }} - Rp.
+                                                {{ number_format($paket->harga, 0, ',', '.') }}</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-9">
                                         <label class="fw-bold" style="font-weight: bold; font-size:17;">Buah</label>
                                         <select name="buah" class="w-100">
-                                            @foreach ($buah as $x)
-                                                <option value="{{ $x->id }}">{{ $x->nama }} - Rp.
-                                                    {{ number_format($x->harga, 0, ',', '.') }}</option>
-                                            @endforeach
+                                            <option value="{{ $paket->idbuah }}">{{ $paket->nama }} - Rp.
+                                                {{ number_format($paket->harga, 0, ',', '.') }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <label class="fw-bold"
+                                            style="font-weight: bold; font-size:17;">Makanan</label>
+                                        <select name="buah" class="w-100">
+                                            <option value="{{ $paket->idmakanan }}">{{ $paket->nama }} - Rp.
+                                                {{ number_format($paket->harga, 0, ',', '.') }}</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-9">
@@ -313,7 +322,7 @@
         $('#addToCart').click(function() {
             var alamatKirim = document.getElementById('alamatkirim').value;
             var userId = {{ Auth::user()->id }};
-            var idMakanan = {{ $detail->id }};
+            var idMakanan = {{ $paket->id }};
             var idMinuman = $('select[name="minuman"]').val();
             var idKue = $('select[name="kue"]').val();
             var idBuah = $('select[name="buah"]').val();
@@ -356,7 +365,7 @@
 <script>
     function calculateTotal() {
         var qty = document.getElementById('qty').value;
-        var harga = {{ $detail->harga }};
+        var harga = {{ $paket->harga }};
         var total = qty * harga;
 
         document.getElementById('total').innerHTML = 'Rp. ' + total.toLocaleString('id-ID');

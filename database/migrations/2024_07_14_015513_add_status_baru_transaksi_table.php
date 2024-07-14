@@ -10,8 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('transaksi', function (Blueprint $table) {
-            //
+        Schema::table('transaksis', function (Blueprint $table) {
+            $table->string('status')->nullable()->after('buktibayar');
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('transaksis', function (Blueprint $table) {
-            //
+            $table->string('status');
         });
     }
 };

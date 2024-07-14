@@ -16,6 +16,10 @@ return new class extends Migration {
             $table->string('nama')->nullable();
             $table->string('deskripsi')->nullable();
             $table->double('harga', 10, 2);
+            $table->string('idmakanan')->nullable();
+            $table->string('idkue')->nullable();
+            $table->string('idminuman')->nullable();
+            $table->string('idbuah')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

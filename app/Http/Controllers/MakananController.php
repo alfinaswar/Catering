@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\KategoriMakanan;
 use App\Models\Makanan;
+use App\Models\PaketMakanan;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MakananController extends Controller
@@ -24,6 +26,23 @@ class MakananController extends Controller
     {
         $kategori = KategoriMakanan::all();
         return view('makanan.create', compact('kategori'));
+    }
+
+    public function paket()
+    {
+        $minuman = makanan::where(
+            'kategori', 1
+        )->get();
+        $makananringan = makanan::where(
+            'kategori', 2
+        )->get();
+        $kue = makanan::where(
+            'kategori', 3
+        )->get();
+        $buah = makanan::where(
+            'kategori', 4
+        )->get();
+        return view('makanan.paket', compact('minuman', 'kue', 'buah', 'makananringan'));
     }
 
     public function kategori()
@@ -50,6 +69,14 @@ class MakananController extends Controller
         return redirect()->route('makanan.index')->with('status', 'Makanan berhasil ditambahkan!');
     }
 
+    public function storepaket(Request $request)
+    {
+        $data = $request->all();
+        PaketMakanan::create($data);
+
+        return redirect()->route('makanan.show')->with('status', 'Makanan berhasil ditambahkan!');
+    }
+
     public function storeKategori(Request $request)
     {
         $data = $request->all();
@@ -63,7 +90,15 @@ class MakananController extends Controller
      */
     public function show(Makanan $makanan)
     {
-        //
+        $paket = PaketMakanan::get();
+        return view('makanan.show', compact('paket'));
+    }
+
+    public function detailpaket(Makanan $makanan, $id)
+    {
+        $paket = PaketMakanan::find($id);
+        $user = User::with('customer')->find(auth()->user()->id);
+        return view('makanan.paket-show', compact('paket', 'user'));
     }
 
     /**
@@ -130,6 +165,17 @@ class MakananController extends Controller
     }
 
     public function destroy(Request $request, $id)
+    {
+        $Kategori = Makanan::find($id);
+        if (!$Kategori) {
+            return response()->json(['message' => 'fasilitas tidak ditemukan'], 404);
+        }
+        $Kategori->delete();
+
+        return redirect()->route('makanan.index')->with('status', 'Kategori Makanan berhasil diupdate!');
+    }
+
+    public function destroytrx(Request $request, $id)
     {
         $Kategori = Makanan::find($id);
         if (!$Kategori) {

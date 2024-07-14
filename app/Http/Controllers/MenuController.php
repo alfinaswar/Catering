@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\KategoriMakanan;
 use App\Models\Makanan;
+use App\Models\PaketMakanan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -18,13 +19,16 @@ class MenuController extends Controller
     {
         //
     }
+
     public function allmenu()
     {
+        $paket = PaketMakanan::get();
         $kategori = KategoriMakanan::all();
         $makanan = Makanan::with('kategorimakan')->get();
         // dd($makanan);
-        return view('menu-catering.all-menu', compact('kategori', 'makanan'));
+        return view('menu-catering.all-menu', compact('kategori', 'makanan', 'paket'));
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -44,7 +48,7 @@ class MenuController extends Controller
         $customer = Customer::create($data);
 
         $generatePassword = now()->format('dmY');
-        $input['name'] = $request->name;
+        $input['name'] = $request->nama;
         $input['email'] = $request->email;
         $input['password'] = Hash::make($generatePassword);
         $input['role'] = 'customer';
@@ -53,7 +57,6 @@ class MenuController extends Controller
         $user->assignRole('2');
 
         return redirect()->route('login');
-
     }
 
     /**

@@ -10,8 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('transaksi', function (Blueprint $table) {
-            //
+        Schema::table('transaksi_details', function (Blueprint $table) {
+            $table->string('idtransaksi', 255)->change();
         });
     }
 
@@ -20,7 +20,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('transaksis', function (Blueprint $table) {
+        Schema::table('transaksi_details', function (Blueprint $table) {
             //
         });
     }
