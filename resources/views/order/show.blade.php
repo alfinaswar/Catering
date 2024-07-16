@@ -84,7 +84,7 @@
 
                                             <td>{{ $transaksi->alamatKirim }}</td>
                                             <td>{{ $transaksi->total }}</td>
-                                            <td><img src="{{ asset('public/buktibayar/' . $transaksi->buktibayar) }}"
+                                            <td><img src="{{ url('storage/buktibayar/' . $transaksi->buktibayar) }}"
                                                     alt="Bukti Bayar" style="width: 100px;"></td>
                                             <td>{{ $transaksi->status == 1 ? 'Baru Dibayar' : 'Sudah Dikonfirmasi' }}</td>
                                             <th width="280px">

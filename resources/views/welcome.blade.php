@@ -7,7 +7,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>Clover</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -97,7 +97,7 @@
                         <div class="header__top__left">
                             <ul>
                                 <li><a href="#">Beranda</a></li>
-                                <li><a href="#">Tentang Kami</a></li>
+                                <li><a href="#tentangkami">Tentang Kami</a></li>
                                 <li><a href="{{ route('menu.allmenu') }}">Menu Catering</a></li>
                             </ul>
                         </div>
@@ -109,9 +109,7 @@
                                 <img src="{{ asset('') }}assets/img/indonesia.png" alt="">
                                 <div>Indonesia</div>
                                 <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="#">Inggris</a></li>
-                                </ul>
+
                             </div>
                             <div class="header__top__right__auth">
                                 <a href="#"><i class="fa fa-user"></i> Login</a>
@@ -181,30 +179,48 @@
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>TEST PULL GITHUB</h5>
+                                <h5>087 875 327 739</h5>
                                 <span>Ingin Bertanya ?</span>
                             </div>
                         </div>
                     </div>
                     <div class="hero__item set-bg"
                         data-setbg="{{ asset('') }}assets/img/banner/AnekaJajanan.png">
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Hero Section End -->
+    <section class="about-us mb-3" id="tentangkami">
+        <div class="container mb-3">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="about-us__image">
+                        <img src="{{ asset('assets/img/banner/about.png') }}" alt="Gambaran Tentang Kami"
+                            width="100%">
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="text-end align-self-center">
+                        <h2>Tentang Kami</h2>
+                        <p>Sebagai perusahaan yang bergerak di bidang kuliner, kami berkomitmen untuk menyajikan
+                            berbagai macam makanan dan minuman yang tidak hanya lezat tetapi juga berkualitas tinggi.
+                            Dengan pengalaman yang telah kami miliki, kami berdedikasi untuk melayani kebutuhan kuliner
+                            Anda dengan standar yang tinggi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Categories Section Begin -->
-    <section class="categories">
-        <div class="container">
+    <section class="categories mt-4">
+        <div class="container mt-4">
             <div class="row">
                 <div class="categories__slider owl-carousel">
                     @foreach ($makanan as $item)
                         <div class="col-lg-3">
                             <div class="categories__item set-bg"
-                                data-setbg="{{ asset('') }}assets/img/categories/cat-1.jpg">
+                                data-setbg="{{ url('storage/gambar/' . $item->gambar) }}">
                                 <h5><a href="#">{{ $item->nama }}</a></h5>
                             </div>
                         </div>

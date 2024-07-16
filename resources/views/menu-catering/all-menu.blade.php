@@ -77,7 +77,7 @@
                         <div class="header__top__left">
                             <ul>
                                 <li><a href="{{ route('beranda') }}">Beranda</a></li>
-                                <li><a href="#">Tentang Kami</a></li>
+                                <li><a href="{{ route('beranda') }}">Tentang Kami</a></li>
                                 <li><a href="{{ route('menu.allmenu') }}">Menu Catering</a></li>
                             </ul>
                         </div>
