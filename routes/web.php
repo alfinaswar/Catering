@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('kategori', [MakananController::class, 'kategori'])->name('makanan.kategori');
         Route::delete('destroy/{id}', [MakananController::class, 'destroy'])->name('makanan.destroy');
         Route::delete('destroyKategori/{id}', [MakananController::class, 'destroyKategori'])->name('makanan.destroyKategori');
-        Route::delete('hapuspaket/{id}', [MakananController::class, 'hapuspaket'])->name('makanan.hapuspaket');
+        Route::delete('hapuspaket/{id}', [MakananController::class, 'destroyPaket'])->name('makanan.hapuspaket');
         Route::POST('store', [MakananController::class, 'storeKategori'])->name('makanan.storeKategori');
         Route::POST('store-paket', [MakananController::class, 'storepaket'])->name('paket-makanan.store');
         Route::POST('store-kategori', [MakananController::class, 'store'])->name('makanan.store');

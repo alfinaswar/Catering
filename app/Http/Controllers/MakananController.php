@@ -175,6 +175,17 @@ class MakananController extends Controller
         return redirect()->route('makanan.index')->with('status', 'Kategori Makanan berhasil diupdate!');
     }
 
+    public function destroyPaket(Request $request, $id)
+    {
+        $paket = PaketMakanan::find($id);
+        if (!$paket) {
+            return response()->json(['message' => 'paket tidak ditemukan'], 404);
+        }
+        $paket->delete();
+
+        return redirect()->back()->with('status', 'Kategori Makanan berhasil diupdate!');
+    }
+
     public function destroytrx(Request $request, $id)
     {
         $Kategori = Makanan::find($id);
