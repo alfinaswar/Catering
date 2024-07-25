@@ -53,8 +53,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('detailpaket/{id}', [MakananController::class, 'detailpaket'])->name('makanan.detailpaket');
     });
     Route::prefix('order')->group(function () {
-        Route::get('create', [OrderController::class, 'create'])->name('makanan.create');
-
         Route::get('detail/{id}', [OrderController::class, 'index'])->name('order.detail');
         Route::post('bayar', [OrderController::class, 'store'])->name('order.store');
         Route::post('cart', [OrderController::class, 'cart'])->name('order.cart');
